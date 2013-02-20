@@ -20,7 +20,8 @@ namespace MSP_Ski_App1
 
         private List<Answer> listAnswers;
         private List<String> listQuestion;
-        private BitmapImage ImageQ;
+        private int counter;
+        private int current;
 
         #endregion Fields
 
@@ -45,6 +46,7 @@ namespace MSP_Ski_App1
         public Quizz()
         {
             InitializeComponent();
+            this.counter = 0;
             this.listAnswers = this.InitializeListAnswer();
             this.listQuestion = this.InitializeListQuestion();
             this.Initialize();
@@ -56,12 +58,12 @@ namespace MSP_Ski_App1
 
         private void Initialize()
         {
-            int value = this.RandomValue();
-            Question.Text = this.listQuestion[value];
-            Answer1.Content = this.listAnswers[value].ListAnswer[0];
-            Answer2.Content = this.listAnswers[value].ListAnswer[1];
-            Answer3.Content = this.listAnswers[value].ListAnswer[2];
-            QuestionImage.Source = new BitmapImage(new Uri(this.listAnswers[value].Path, UriKind.Relative));
+            this.current = this.RandomValue();
+            Question.Text = this.listQuestion[this.current];
+            Answer1.Content = this.listAnswers[this.current].ListAnswer[0];
+            Answer2.Content = this.listAnswers[this.current].ListAnswer[1];
+            Answer3.Content = this.listAnswers[this.current].ListAnswer[2];
+            QuestionImage.Source = new BitmapImage(new Uri(this.listAnswers[this.current].Path, UriKind.Relative));
         }
 
         public int RandomValue()
@@ -87,7 +89,11 @@ namespace MSP_Ski_App1
 
         private void Answer_Clicked(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Checked"+sender.ToString());
+            if (((Button)sender).Content.Equals(this.listAnswers[this.current].ListAnswer[this.current]))
+                this.counter++;
+            this.ListQuestion.RemoveAt(current);
+            this.ListAnswers.RemoveAt(current);
+            this.Initialize();
         }
 
         #endregion Methods
