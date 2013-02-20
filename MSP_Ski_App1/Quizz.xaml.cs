@@ -68,14 +68,22 @@ namespace MSP_Ski_App1
 
         public int RandomValue()
         {
-            return new Random().Next(0, this.listQuestion.Count);
+            return new Random().Next(0, this.listQuestion.Count-1);
         }
 
         public List<Answer> InitializeListAnswer()
         {
             List<Answer> _listQs = new List<Answer>();
-            _listQs.Add(new Answer("Ski Alpin", "Ski freestyle", "Snowboard", 1,"Ressources/1.jpg"));
-            _listQs.Add(new Answer("Slalom géant", "Slalom", "Slalom super géant",2,"Ressources/2.jpg"));
+            _listQs.Add(new Answer("Ski Alpin", "Ski freestyle", "Snowboard", 0,"Ressources/1.jpg"));
+            _listQs.Add(new Answer("Ski Alpin", "Saut à Ski", "Ski télémark", 1, "Ressources/2.jpg"));
+            _listQs.Add(new Answer("Ski sur herbe", "Ski télémark", "Ski alpin", 0, "Ressources/3.jpg"));
+            _listQs.Add(new Answer("Ski de fond", "Ski acrobatique", "Biathlon", 0, "Ressources/4.jpg"));
+            _listQs.Add(new Answer("Ski freestyle", "Saut à Ski", "Biathlon", 0, "Ressources/5.jpg"));
+            _listQs.Add(new Answer("Ski de vitesse", "Ski acrobatique", "Snowboard", 2, "Ressources/6.jpg"));
+            _listQs.Add(new Answer("Ski acrobatique", "Ski freestyle", "Ski télémark", 2, "Ressources/7.jpg"));
+            _listQs.Add(new Answer("Ski de fond", "Ski de vitesse", "Ski alpin", 1, "Ressources/8.jpg"));
+            _listQs.Add(new Answer("Biathlon", "Ski alpin", "Ski de fond", 0, "Ressources/9.jpg"));
+            _listQs.Add(new Answer("Ski freestyle", "Ski télémark", "Ski acrobatique",2,"Ressources/10.jpg"));
             return _listQs;
         }
 
@@ -83,17 +91,26 @@ namespace MSP_Ski_App1
         {
             List<String> _listQs = new List<String>();
             _listQs.Add("Quel est cette discipline");
-            _listQs.Add("Dans quelle épreuve les skieurs doivent-ils contourner des poteaux disposés très près les uns des autres?");
+            _listQs.Add("Quel est cette discipline");
+            _listQs.Add("Quel est cette discipline");
+            _listQs.Add("Quel est cette discipline");
+            _listQs.Add("Quel est cette discipline");
+            _listQs.Add("Quel est cette discipline");
+            _listQs.Add("Quel est cette discipline");
+            _listQs.Add("Quel est cette discipline");
+            _listQs.Add("Quel est cette discipline");
+            _listQs.Add("Quel est cette discipline");
             return _listQs;
         }
 
         private void Answer_Clicked(object sender, RoutedEventArgs e)
         {
-            if (((Button)sender).Content.Equals(this.listAnswers[this.current].ListAnswer[this.current]))
+            if (((Button)sender).Content.Equals(this.listAnswers[this.current].ListAnswer[this.listAnswers[this.current].NbTrue]))
                 this.counter++;
             this.ListQuestion.RemoveAt(current);
             this.ListAnswers.RemoveAt(current);
             this.Initialize();
+            MessageBox.Show(Convert.ToString(counter));
         }
 
         #endregion Methods
