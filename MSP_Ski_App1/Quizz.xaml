@@ -22,13 +22,13 @@
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" >
-            <TextBlock Name="Question" Text="Question" Margin="0,20,0,0" TextWrapping="Wrap" FontSize="25"/>
-            <Image Height="142" HorizontalAlignment="Left" Margin="270,10,0,0" Name="QuestionImage" Stretch="Fill" VerticalAlignment="Top" Width="191" />
-            <StackPanel>
-                <RadioButton Content="RadioButton" Height="100" Margin="0,200,0,0" Name="Answer1" />
-                <RadioButton Content="RadioButton" Height="100" Margin="0,35,0,0" Name="Answer2" VerticalAlignment="Top" />
-                <RadioButton Content="RadioButton" Height="100" Margin="0,35,0,0" Name="Answer3" VerticalAlignment="Top" />
-                <Button Content="Suivant" Height="100" Name="NextQuestion" Width="200" Margin="0,50,0,0"/>
+            <TextBlock Name="Question" Text="Question" Margin="0,160,6,445" TextWrapping="Wrap" FontSize="25" HorizontalAlignment="Center" Width="474" />
+            <TextBlock Name="Timer" Text="Timer" Margin="10,10,0,0" TextWrapping="Wrap" FontSize="56" HorizontalAlignment="Left" VerticalAlignment="Top" Height="142" Width="200" />
+            <Image Height="142" HorizontalAlignment="Left" Margin="270,10,0,0" Name="QuestionImage" Stretch="Fill" VerticalAlignment="Top" Width="200" />
+            <StackPanel VerticalAlignment="Bottom">
+                <Button Height="150" Name="Answer1" Click="Answer_Clicked"/>
+                <Button Height="150" Name="Answer2" VerticalAlignment="Top" Click="Answer_Clicked" />
+                <Button Height="150" Name="Answer3" VerticalAlignment="Top" Click="Answer_Clicked" />
             </StackPanel>         
         </Grid>
     </Grid>

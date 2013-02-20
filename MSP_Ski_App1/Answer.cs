@@ -17,6 +17,8 @@ namespace MSP_Ski_App1
         #region Fields
 
         private List<String> listAnswer;
+        private int nbTrue;
+        private String path;
 
         #endregion Fields
 
@@ -28,18 +30,37 @@ namespace MSP_Ski_App1
             set { listAnswer = value; }
         }
 
+        public int NbTrue
+        {
+            get { return nbTrue; }
+            set { nbTrue = value; }
+        }
+
+        public string Path
+        {
+            get { return path; }
+            set { path = value; }
+        }
+
         #endregion Accessors
 
         #region Constructors
 
-        public Answer() { this.listAnswer = new List<string>(); }
+        public Answer()
+        { 
+            this.listAnswer = new List<string>();
+            this.nbTrue = 0;
+            this.path = null;
+        }
 
-        public Answer(String ans1, String ans2, String ans3)
+        public Answer(String ans1, String ans2, String ans3, int _nbTrue, String path)
         {
             this.listAnswer = new List<string>();
             this.listAnswer.Add(ans1);
             this.listAnswer.Add(ans2);
             this.listAnswer.Add(ans3);
+            this.nbTrue = _nbTrue;
+            this.path = path;
         }
 
         #endregion Constructors
