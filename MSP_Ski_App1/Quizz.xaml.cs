@@ -20,7 +20,7 @@ namespace MSP_Ski_App1
 
         private List<Answer> listAnswers;
         private List<String> listQuestion;
-        private int counter;
+        private int counter, combo;
         private int current;
 
         #endregion Fields
@@ -47,6 +47,7 @@ namespace MSP_Ski_App1
         {
             InitializeComponent();
             this.counter = 0;
+            this.combo = 0;
             this.listAnswers = this.InitializeListAnswer();
             this.listQuestion = this.InitializeListQuestion();
             this.Initialize();
@@ -84,6 +85,7 @@ namespace MSP_Ski_App1
             _listQs.Add(new Answer("Ski de fond", "Ski de vitesse", "Ski alpin", 1, "Ressources/8.jpg"));
             _listQs.Add(new Answer("Biathlon", "Ski alpin", "Ski de fond", 0, "Ressources/9.jpg"));
             _listQs.Add(new Answer("Ski freestyle", "Ski télémark", "Ski acrobatique",2,"Ressources/10.jpg"));
+            _listQs.Add(new Answer("1924","1930","1936",2,"Ressources/11.jpg"));
             return _listQs;
         }
 
@@ -100,17 +102,35 @@ namespace MSP_Ski_App1
             _listQs.Add("Quel est cette discipline");
             _listQs.Add("Quel est cette discipline");
             _listQs.Add("Quel est cette discipline");
+            _listQs.Add("En quelle année le ski alpin est-il entré aux Jeux Olympiques d'hiver ?");
             return _listQs;
         }
 
         private void Answer_Clicked(object sender, RoutedEventArgs e)
         {
             if (((Button)sender).Content.Equals(this.listAnswers[this.current].ListAnswer[this.listAnswers[this.current].NbTrue]))
-                this.counter++;
+            {
+                this.counter+=2;
+                this.combo++;
+            }
+            else
+            {
+                this.combo = 0;
+            }
+
             this.ListQuestion.RemoveAt(current);
             this.ListAnswers.RemoveAt(current);
-            this.Initialize();
-            MessageBox.Show(Convert.ToString(counter));
+
+            if (this.listAnswers.Count == 0)
+            {
+                this.counter += this.combo * 5;
+                MessageBox.Show(Convert.ToString(counter));
+                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            }
+            else
+            {
+                this.Initialize();
+            }
         }
 
         #endregion Methods
