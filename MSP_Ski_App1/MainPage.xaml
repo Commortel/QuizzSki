@@ -10,30 +10,29 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="439"/>
         </Grid.RowDefinitions>
 
         <!-- contient le nom de l'application et le titre de la page -->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel x:Name="TitlePanel" Background="Black" Margin="0,0,0,329" Grid.RowSpan="2">
             <TextBlock x:Name="ApplicationTitle" Text="Quizz" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Ski Quizz" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Text="Ski Quizz" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Height="93" />
             <TextBlock x:Name="OrientationTextBlock" FontSize="25"/>
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
-        <Grid x:Name="ContentPanel" Grid.Row="0" Margin="12,200,12,0">
+        <Grid x:Name="ContentPanel" Grid.Row="0" Margin="12,200,12,0" Background="Black">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50*" />
             </Grid.RowDefinitions>
-            <HyperlinkButton NavigateUri="/Quizz.xaml" Content="Play" Margin="-6,0,6,-1" Grid.Row="0" BorderThickness="5" BorderBrush="Aqua"/>
+            <HyperlinkButton NavigateUri="/Quizz.xaml" Content="Play" Margin="-6,0,6,124" BorderThickness="5" BorderBrush="Aqua" Grid.RowSpan="2" />
             <HyperlinkButton NavigateUri="/Highscore.xaml" Content="High Score" Grid.Row="1" Margin="-6,30,6,-1" />
         </Grid>
     </Grid>

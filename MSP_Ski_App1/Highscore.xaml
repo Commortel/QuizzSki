@@ -11,7 +11,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True" xmlns:my="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI">
+    shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -28,13 +28,15 @@
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ListBox x:Name="listeDesScores">
+            <ListBox x:Name="listeDesScores" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="{Binding Image}" Width="30" Height="30" />
-                            <TextBlock Text="{Binding Description}" Margin="20 0 0 0" />
-                        </StackPanel>
+                        <Border Background="White" Margin="20">
+                            <StackPanel Orientation="Horizontal" Width="450" >
+                                <Image Source="{Binding Image}" Width="120" Height="120" Stretch="Uniform" Margin="15" />
+                                <TextBlock Width="300" Text="{Binding Score}" Margin="20 0 0 0" Foreground="#FF1D65AF" FontSize="48" FontWeight="Black" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

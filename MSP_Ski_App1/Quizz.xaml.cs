@@ -11,6 +11,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using System.Windows.Threading;
 
 namespace MSP_Ski_App1
 {
@@ -22,6 +23,7 @@ namespace MSP_Ski_App1
         private List<String> listQuestion;
         private int counter, combo;
         private int current;
+        private int timer;
 
         #endregion Fields
 
@@ -46,11 +48,13 @@ namespace MSP_Ski_App1
         public Quizz()
         {
             InitializeComponent();
+            this.timer = 50;
             this.counter = 0;
             this.combo = 0;
             this.listAnswers = this.InitializeListAnswer();
             this.listQuestion = this.InitializeListQuestion();
             this.Initialize();
+            this.LoadTimer();
         }
 
         #endregion Constructors
@@ -86,23 +90,38 @@ namespace MSP_Ski_App1
             _listQs.Add(new Answer("Biathlon", "Ski alpin", "Ski de fond", 0, "Ressources/9.jpg"));
             _listQs.Add(new Answer("Ski freestyle", "Ski télémark", "Ski acrobatique",2,"Ressources/10.jpg"));
             _listQs.Add(new Answer("1924","1930","1936",2,"Ressources/11.jpg"));
+            _listQs.Add(new Answer("Slalom géant", "Slalom", "Slalom super géant", 1, "Ressources/11.png"));
+            _listQs.Add(new Answer("Slalom géant", "Slalom", "Slalom super géant", 0, "Ressources/11.png"));
+            _listQs.Add(new Answer("Slalom géant", "Slalom", "Slalom super géant", 2, "Ressources/11.png"));
+            _listQs.Add(new Answer("Slalom géant", "Slalom", "Slalom super géant", 1, "Ressources/11.png"));
+            _listQs.Add(new Answer("Slalom géant", "Slalom", "Slalom super géant", 1, "Ressources/11.png"));
+            _listQs.Add(new Answer("Les bosses en parallèle", "Les bosses", "Le saut", 0, "Ressources/12.jpg"));
+            _listQs.Add(new Answer("1992", "2004", "2010", 2, "Ressources/12.png"));
             return _listQs;
         }
 
         public List<String> InitializeListQuestion()
         {
             List<String> _listQs = new List<String>();
-            _listQs.Add("Quel est cette discipline");
-            _listQs.Add("Quel est cette discipline");
-            _listQs.Add("Quel est cette discipline");
-            _listQs.Add("Quel est cette discipline");
-            _listQs.Add("Quel est cette discipline");
-            _listQs.Add("Quel est cette discipline");
-            _listQs.Add("Quel est cette discipline");
-            _listQs.Add("Quel est cette discipline");
-            _listQs.Add("Quel est cette discipline");
-            _listQs.Add("Quel est cette discipline");
+            _listQs.Add("Quel est cette discipline ?");
+            _listQs.Add("Quel est cette discipline ?");
+            _listQs.Add("Quel est cette discipline ?");
+            _listQs.Add("Quel est cette discipline ?");
+            _listQs.Add("Quel est cette discipline ?");
+            _listQs.Add("Quel est cette discipline ?");
+            _listQs.Add("Quel est cette discipline ?");
+            _listQs.Add("Quel est cette discipline ?");
+            _listQs.Add("Quel est cette discipline ?");
+            _listQs.Add("Quel est cette discipline ?");
             _listQs.Add("En quelle année le ski alpin est-il entré aux Jeux Olympiques d'hiver ?");
+            _listQs.Add("Dans quelle épreuve les skieurs doivent-ils contourner des poteaux disposés très près les uns des autres ?");
+            _listQs.Add("Dans quelle épreuve les poteaux sont-ils moyennement rapprochés les uns des autres ?");
+            _listQs.Add("Dans quelle épreuve les poteaux sont-ils très éloignés les uns des autres ?");
+            _listQs.Add("Dans quelle épreuve les skieurs ont-ils la possibilité de faire basculer les poteaux ?");
+            _listQs.Add("Dans quelle épreuve les portes sont-elles formées de seulement un poteau ?");
+            _listQs.Add("Parmi ces disciplines du ski acrobatique, pour laquelle n'y a-t-il pas de compétitions aux Jeux olympiques d'hiver ?");
+            _listQs.Add("Depuis quand le ski cross est-il présenté aux Jeux olympiques d'hiver ?");
+            _listQs.Add("");
             return _listQs;
         }
 
@@ -118,19 +137,33 @@ namespace MSP_Ski_App1
                 this.combo = 0;
             }
 
-            this.ListQuestion.RemoveAt(current);
-            this.ListAnswers.RemoveAt(current);
+            this.ListQuestion.RemoveAt(this.current);
+            this.ListAnswers.RemoveAt(this.current);
 
             if (this.listAnswers.Count == 0)
             {
                 this.counter += this.combo * 5;
-                MessageBox.Show(Convert.ToString(counter));
+                MessageBox.Show(Convert.ToString("counter : " + this.counter + "timer : " + this.timer));
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             }
             else
             {
                 this.Initialize();
             }
+        }
+
+        void OnTimerTick(Object sender, EventArgs args)
+        {
+            Timer.Text = Convert.ToString(this.timer);
+            this.timer--;
+        }
+
+        private void LoadTimer()
+        {
+            DispatcherTimer newTimer = new DispatcherTimer();
+            newTimer.Interval = TimeSpan.FromSeconds(1);
+            newTimer.Tick += OnTimerTick;
+            newTimer.Start();
         }
 
         #endregion Methods

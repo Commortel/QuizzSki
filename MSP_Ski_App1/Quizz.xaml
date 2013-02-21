@@ -21,14 +21,14 @@
         </Grid.RowDefinitions>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" >
-            <TextBlock Name="Question" Text="Question" Margin="0,200,0,450" TextWrapping="Wrap" FontSize="25" HorizontalAlignment="Center" Width="474" />
-            <TextBlock Name="Timer" Text="Timer" Margin="10,10,0,0" TextWrapping="Wrap" FontSize="56" HorizontalAlignment="Left" VerticalAlignment="Top" Height="142" Width="200" />
+        <Grid x:Name="ContentPanel" Grid.Row="1" Background="White">
+            <TextBlock Foreground="Black" Name="Question" Text="Question" Margin="0,200,0,450" TextWrapping="Wrap" FontSize="25" HorizontalAlignment="Center" Width="474" />
+            <TextBlock Foreground="Black" Name="Timer" Text="50" Margin="10,10,0,0" TextWrapping="Wrap" FontSize="56" HorizontalAlignment="Left" VerticalAlignment="Top" Height="142" Width="200" />
             <Image Height="180" HorizontalAlignment="Left" Margin="250,10,0,0" Name="QuestionImage" Stretch="Fill" VerticalAlignment="Top" Width="220" />
             <StackPanel VerticalAlignment="Bottom">
-                <Button Height="150" Name="Answer1" Click="Answer_Clicked"/>
-                <Button Height="150" Name="Answer2" VerticalAlignment="Top" Click="Answer_Clicked" />
-                <Button Height="150" Name="Answer3" VerticalAlignment="Top" Click="Answer_Clicked" />
+                <Button Background="Black" Height="150" Name="Answer1" Click="Answer_Clicked"/>
+                <Button Background="Black" Height="150" Name="Answer2" VerticalAlignment="Top" Click="Answer_Clicked" />
+                <Button Background="Black" Height="150" Name="Answer3" VerticalAlignment="Top" Click="Answer_Clicked" />
             </StackPanel>         
         </Grid>
     </Grid>
