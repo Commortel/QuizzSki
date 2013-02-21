@@ -16,5 +16,16 @@ namespace MSP_Ski_App1
     {
         public int Score { get; set; }
         public BitmapImage Image { get; set; }
+
+        public HighscoreElement(int score)
+        {
+            this.Score = score;
+        }
+
+        public HighscoreElement(int score, BitmapImage image)
+        {
+            this.Score = score;
+            this.Image = image;
+        }
     }
 }

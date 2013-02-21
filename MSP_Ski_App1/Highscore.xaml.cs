@@ -11,14 +11,12 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using System.Windows.Media.Imaging;
-using System.IO.IsolatedStorage;
 
 namespace MSP_Ski_App1
 {
     public partial class Highscore : PhoneApplicationPage
     {
         private List<HighscoreElement> scores;
-        private IsolatedStorageSettings userSettings = IsolatedStorageSettings.ApplicationSettings;
 
         public Highscore()
         {
@@ -26,12 +24,12 @@ namespace MSP_Ski_App1
 
             try
             {
-                int length = (int)userSettings["taille"];
+                int length = (int)DataManager.userSettings["taille"];
                 this.scores = new List<HighscoreElement>();
-                for(int i=0; i < length; i++)
-                    this.scores.Add((HighscoreElement)userSettings["highscore" + i]);
+                for(int i=1; i <= length; i++)
+                    this.scores.Add(new HighscoreElement((int)DataManager.userSettings["highscore"+i]));
 
-                listeDesScores.ItemsSource = scores.OrderByDescending(e => e.Score).Select(e => new HighscoreElement { Score = e.Score, Image = ObtientImage(e.Score) });
+                listeDesScores.ItemsSource = scores.OrderByDescending(e => e.Score).Select(e => new HighscoreElement(e.Score,ObtientImage(e.Score)));
             }
             catch (System.Collections.Generic.KeyNotFoundException)
             {
@@ -59,9 +57,9 @@ namespace MSP_Ski_App1
 
         public void Save()
         {
-            userSettings["taille"] = this.scores.Count;
+            DataManager.userSettings["taille"] = this.scores.Count;
             for(int i=0; i < this.scores.Count; i++)
-                IsolatedStorageSettings.ApplicationSettings["highscore" + i] = this.scores[i];
+                DataManager.userSettings["highscore" + i] = this.scores[i];
         }
     }
 }

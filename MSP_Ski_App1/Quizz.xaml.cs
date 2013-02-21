@@ -142,7 +142,20 @@ namespace MSP_Ski_App1
 
             if (this.listAnswers.Count == 0)
             {
+                int length = 0;
                 this.counter += this.combo * 5;
+                try
+                {
+                    length = (int)DataManager.userSettings["taille"];
+                    length++;
+                    DataManager.userSettings["taille"] = length;
+                }
+                catch (System.Collections.Generic.KeyNotFoundException)
+                {
+                    length = 1;
+                    DataManager.userSettings.Add("taille", length);
+                }
+                DataManager.userSettings.Add("highscore" + length, this.counter);
                 MessageBox.Show(Convert.ToString("counter : " + this.counter + "timer : " + this.timer));
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             }
