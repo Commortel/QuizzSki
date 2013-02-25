@@ -14,26 +14,40 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
-    <Grid x:Name="LayoutRoot" Background="White">
+    <Grid x:Name="LayoutRoot" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="439"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="200*"/>
         </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style TargetType="HyperlinkButton" x:Key="Link">
+                <Setter Property="HyperlinkButton.FontWeight" Value="Bold" />
+                <Setter Property="HyperlinkButton.FontSize" Value="34" />
+                <Setter Property="HyperlinkButton.FontFamily" Value="Comic Sans MS" />
+                <Setter Property="HyperlinkButton.HorizontalAlignment" Value="Center" />
+                <Setter Property="HyperlinkButton.VerticalAlignment" Value="Center" />
+                <Setter Property="HyperlinkButton.Width" Value="250" />
+                <Setter Property="HyperlinkButton.Height" Value="220" />       
+            </Style>
+        </Grid.Resources>
 
         <!-- contient le nom de l'application et le titre de la page -->
-        <StackPanel x:Name="TitlePanel" Background="Black" Margin="0,0,0,329" Grid.RowSpan="2">
+        <StackPanel x:Name="TitlePanel" Background="Black" Grid.Row="0">
             <TextBlock x:Name="ApplicationTitle" Text="Quizz" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Ski Quizz" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" Height="93" />
-            <TextBlock x:Name="OrientationTextBlock" FontSize="25"/>
+            <TextBlock x:Name="PageTitle" Text="Ski Quizz" Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
-        <Grid x:Name="ContentPanel" Grid.Row="0" Margin="12,200,12,0" Background="Black">
+        <Grid x:Name="ContentPanel" Margin="20,100,20,0" Background="Black" Height="220" VerticalAlignment="Top"  Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50*" />
+                <RowDefinition Height="220" />
             </Grid.RowDefinitions>
-            <HyperlinkButton NavigateUri="/Quizz.xaml" Content="Play" Margin="-6,0,6,124" BorderThickness="5" BorderBrush="Aqua" Grid.RowSpan="2" />
-            <HyperlinkButton NavigateUri="/Highscore.xaml" Content="High Score" Grid.Row="1" Margin="-6,30,6,-1" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="230" />
+                <ColumnDefinition Width="230" />
+            </Grid.ColumnDefinitions>
+            <HyperlinkButton Style="{StaticResource Link}" NavigateUri="/Quizz.xaml" Content="Play" Background="White" Foreground="Black"/>
+            <HyperlinkButton Grid.Column="1" Style="{StaticResource Link}" NavigateUri="/Highscore.xaml" Content="High Score" Background="Blue"/>
         </Grid>
     </Grid>
  

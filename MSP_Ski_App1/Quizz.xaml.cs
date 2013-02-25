@@ -24,6 +24,7 @@ namespace MSP_Ski_App1
         private int counter, combo;
         private int current;
         private int timer;
+        private DispatcherTimer Dtimer;
 
         #endregion Fields
 
@@ -48,7 +49,8 @@ namespace MSP_Ski_App1
         public Quizz()
         {
             InitializeComponent();
-            this.timer = 50;
+            this.Dtimer = new DispatcherTimer();
+            this.timer = 48;
             this.counter = 0;
             this.combo = 0;
             this.listAnswers = this.InitializeListAnswer();
@@ -142,22 +144,7 @@ namespace MSP_Ski_App1
 
             if (this.listAnswers.Count == 0)
             {
-                int length = 0;
-                this.counter += this.combo * 5;
-                try
-                {
-                    length = (int)DataManager.userSettings["taille"];
-                    length++;
-                    DataManager.userSettings["taille"] = length;
-                }
-                catch (System.Collections.Generic.KeyNotFoundException)
-                {
-                    length = 1;
-                    DataManager.userSettings.Add("taille", length);
-                }
-                DataManager.userSettings.Add("highscore" + length, this.counter);
-                MessageBox.Show(Convert.ToString("counter : " + this.counter + "timer : " + this.timer));
-                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                this.OnFinish();
             }
             else
             {
@@ -169,14 +156,38 @@ namespace MSP_Ski_App1
         {
             Timer.Text = Convert.ToString(this.timer);
             this.timer--;
+            if (this.timer == 0)
+            {
+                this.OnFinish();
+            }
         }
 
         private void LoadTimer()
         {
-            DispatcherTimer newTimer = new DispatcherTimer();
-            newTimer.Interval = TimeSpan.FromSeconds(1);
-            newTimer.Tick += OnTimerTick;
-            newTimer.Start();
+            Dtimer.Interval = TimeSpan.FromSeconds(1);
+            Dtimer.Tick += OnTimerTick;
+            Dtimer.Start();
+        }
+
+        private void OnFinish()
+        {
+            int length = 0;
+            this.counter += this.combo * 5;
+            try
+            {
+                length = (int)DataManager.userSettings["taille"];
+                length++;
+                DataManager.userSettings["taille"] = length;
+            }
+            catch (System.Collections.Generic.KeyNotFoundException)
+            {
+                length = 1;
+                DataManager.userSettings.Add("taille", length);
+            }
+            DataManager.userSettings.Add("highscore" + length, this.counter);
+            MessageBox.Show(Convert.ToString("counter : " + this.counter + "timer : " + this.timer));
+            Dtimer.Stop();
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
 
         #endregion Methods
